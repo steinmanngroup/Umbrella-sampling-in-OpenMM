@@ -1,0 +1,16 @@
+temp                	298.15    	kelvin                          
+fric_coef           	10.0      	/picosecond                     
+step_size           	1.0       	femtosecond                     
+pressure            	1.0       	bar                             
+M                   	10        	step                            
+R_min               	0.0       	angstrom                        
+R_max               	5.0       	angstrom                        
+K_pull_min_eq       	1000.0   	kilocalorie/(angstrom**2*mole)  
+K_pull_prod         	100.0     	kilocalorie/(angstrom**2*mole)  
+K_center            	10000.0   	kilocalorie/(angstrom**2*mole)  
+displace_min_step   	10      	step                            
+min_step            	100      	step                            
+eq_step             	100      	step                            
+sim_loop            	25      	step                            
+report_interval     	10        	step                            
+sim_step            	10      	step                            

@@ -1,0 +1,4 @@
+Molecule  	Initial_file
+host      	benzene/start/bcd_gly.sdf
+guest     	benzene/start/benzene.sdf
+complex   	benzene/start/bcd_gly_benzene.pdb
