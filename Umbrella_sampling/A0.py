@@ -11,5 +11,5 @@ set_pars(main_path=main_path)
 set_initial_molecules(main_path)
 
 # Setting up sh files
-get_sub2(main_path=main_path)
-get_sub_AI3(main_path=main_path)
+# get_sub2(main_path=main_path)
+# get_sub_AI3(main_path=main_path)
