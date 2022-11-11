@@ -490,3 +490,53 @@ def get_sub_AI3(main_path:str):
     with open(sub3, 'w') as sub3_file:
         sub3_file.writelines(lines)
 
+def get_sub_herc3(main_path:str):
+    
+    sub3 = 'D_hercules.sh'
+    python_script = 'D0_4.py'
+    
+    print(f'{python_script} is submitted for {sub3} (creating and setting up the initial files):\t')
+    
+    R0 = get_R0(main_path, for_shell=True)
+    R0_index = get_R0_index(main_path, for_sbatch_array=True)
+    time_hours = f'{1:02}'
+    time_min = f'{30:02}'
+
+    sub3_dict = OrderedDict(
+        [
+            ('0'     ,   '#!/usr/bin/env bash'),
+            ('1'     ,  f'#SBATCH --job-name D_{main_path}'),
+            ('2'     ,   '#SBATCH --partition batch'),
+            ('3'     ,  f'#SBATCH --time {time_hours}:{time_min}:00'),
+            ('4a'    ,   '#SBATCH --gres=gpu:1'),
+            ('4b'    ,   '#SBATCH --ntasks-per-node=1'),
+            ('4c'    ,   '#SBATCH --cpus-per-task=6'),
+            ('4d'    ,   '#SBATCH --qos=allgpus'),
+            ('7'     ,  f'#SBATCH --array={R0_index}'),
+            ('8'     ,   ''),
+            ('9'     ,   'export PATH=/usr/local/cuda-11.1/bin:$PATH'), 
+            ('10'    ,   'export LD_LIBRARY_PATH=/usr/local/cuda-11.1/lib64:$LD_LIBRARY_PATH'),
+            ('11'    ,   'export OPENMM_CPU_THREADS=$SLURM_CPUS_PER_TASK'),
+            ('12'    ,   ''),
+            ('13'    ,   ''),
+            ('14'    ,   'SLURM_ID=$SLURM_ARRAY_TASK_ID'),
+            ('15'    ,  f'DISTANCES={R0}'),
+            ('16'    ,   ''),
+            ('17'    ,   ''),
+            ('18'    ,   ''),
+            ('19'    ,  f'MAIN_PATH={main_path}'),
+            ('20'    ,   'echo "The main path is $MAIN_PATH. All further simulation will take place here"'),
+            ('21'    ,  f'python {python_script} $MAIN_PATH ${"{DISTANCES[$SLURM_ID]}"} $SLURM_ID'),
+        ]
+    )
+    
+    keys = sub3_dict.keys()
+    lines = []
+    print('_'*100)
+    for key in keys:
+        print(f'{sub3_dict[key]}')
+        lines.append(f'{sub3_dict[key]}\n')
+    print('_'*100, '\n\n'*2)
+    
+    with open(sub3, 'w') as sub3_file:
+        sub3_file.writelines(lines)
