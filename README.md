@@ -29,6 +29,8 @@ Run the pythonfile `A0.py`. This will produce two additional files: `C_herc.sh` 
 Both of these are setup for a specific slurm system but in essence, they automate much of the procedures.
 `B0.py` still has to be run seperatly.
 
+## Data
+The data is available for download at https://zenodo.org/record/7852102#.ZEJeIHZBwuU.
 
 ## Soon to come
 Handling the data by FastMBAR
